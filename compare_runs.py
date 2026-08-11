@@ -1,7 +1,56 @@
+"""Problem
+
+A CI pipeline produces a JSON summary for every test run. When a new run has failures, engineers need to quickly determine:
+
+Which tests are newly failing?
+Which failures were already present?
+Which previously failing tests are now passing?
+
+Build a small CLI utility that compares two test-run result files.
+
+Description
+
+Create a script that can be run as:
+
+python compare_runs.py <previous_run.json> <current_run.json>
+
+The script should compare the test results from the two runs and print a concise summary.
+
+Input / Example
+
+previous_run.json
+
+{
+    "run_id": "1842",
+    "tests": {
+        "test_camera_init": "PASS",
+        "test_lidar_connection": "PASS",
+        "test_arm_home": "FAIL",
+        "test_gripper_open": "FAIL",
+        "test_robot_shutdown": "PASS"
+    }
+}
+
+current_run.json
+
+{
+    "run_id": "1843",
+    "tests": {
+        "test_camera_init": "PASS",
+        "test_lidar_connection": "FAIL",
+        "test_arm_home": "FAIL",
+        "test_gripper_open": "PASS",
+        "test_robot_shutdown": "PASS",
+        "test_battery_status": "FAIL"
+    }
+}
+"""
+
 import sys
 import json
 from pathlib import Path
 
+# shoud be argparse here, done for simplicity
 previous_run = sys.argv[1]
 current_run = sys.argv[2]
 

@@ -1,3 +1,24 @@
+"""Problem
+
+CI runs produce logs and test artifacts across multiple directories. When a run fails, engineers have to manually locate the files they need.
+
+Build a small command-line utility that collects relevant artifacts from a CI run into a single directory.
+
+Description
+
+Create a script that can be run from the command line:
+
+python artifact_collector.py <source_dir> <output_dir> <extension> [<extension> ...]
+
+The script should:
+
+Recursively search source_dir.
+Find files matching any of the provided extensions.
+Copy those files into output_dir.
+Preserve enough of the original directory structure in the destination filename to prevent collisions.
+Print a summary of what was collected.
+"""
+
 import argparse
 import sys
 import shutil
