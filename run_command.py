@@ -14,22 +14,25 @@ def pass_command(retries, delay, command):
     split_command = shlex.split(command)
     retries = int(retries)
 
-    run_attempt = subprocess.run(split_command, capture_output=True, text=True)
-    if run_attempt.returncode != 0 and retries > 0:
-        attempts = 0
-        while retries > 0 and run_attempt.returncode != 0:
-            retries -= 1
-            attempts += 1
-            print(f"Attempt failed with exit code {run_attempt.returncode}")
-            print(f"Retrying in {delay}s...")
-            time.sleep(int(delay))
-            run_attempt = subprocess.run(split_command, capture_output=True, text=True)
-        if run_attempt.returncode != 0:
-            print(f"Comamnd failed after {attempts} attempts")
+    try:
+        run_attempt = subprocess.run(split_command, capture_output=True, text=True)
+        if run_attempt.returncode != 0 and retries > 0:
+            attempts = 0
+            while retries > 0 and run_attempt.returncode != 0:
+                retries -= 1
+                attempts += 1
+                print(f"Attempt failed with exit code {run_attempt.returncode}")
+                print(f"Retrying in {delay}s...")
+                time.sleep(int(delay))
+                run_attempt = subprocess.run(split_command, capture_output=True, text=True)
+            if run_attempt.returncode != 0:
+                print(f"Comamnd failed after {attempts} attempts")
+                sys.exit(1)
+        print(run_attempt.stdout)
+    except FileNotFoundError:
+        print("Command not found.")
+        sys.exit(1)
 
-    # except FileNotFoundError:
-        # print("Command not found.")
-        # sys.exit(1)
 def main():
     args = parser.parse_args()
     retries = args.retries
