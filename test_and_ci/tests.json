@@ -1,0 +1,28 @@
+{
+    "tests": [
+        {
+            "name": "test_arm_home",
+            "component": "arm",
+            "priority": "high",
+            "enabled": true
+        },
+        {
+            "name": "test_arm_limits",
+            "component": "arm",
+            "priority": "medium",
+            "enabled": true
+        },
+        {
+            "name": "test_camera_init",
+            "component": "camera",
+            "priority": "high",
+            "enabled": true
+        },
+        {
+            "name": "test_arm_calibration",
+            "component": "arm",
+            "priority": "high",
+            "enabled": false
+        }
+    ]
+}
