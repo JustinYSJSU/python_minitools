@@ -43,3 +43,58 @@ def generate_empty_data():
             }
         }
     )
+
+@pytest.fixture
+def generate_same_result_data():
+    return(
+        {
+            "data": [
+                {
+                    "name": "test_login",
+                    "status": "passed",
+                    "duration": 0.42,
+                },
+                {
+                    "name": "test_logout",
+                    "status": "passed",
+                    "duration": 0.18,
+                },
+                {
+                    "name": "test_signup",
+                    "status": "passed",
+                    "duration": 0.05,
+                },
+            ],
+            "results":{
+                "passed": 3,
+                "failed": 0,
+                "skipped": 0,
+                "total_duration": 0.65
+            }
+        }
+    )
+
+@pytest.fixture
+def generate_invalid_status_data():
+    return(
+        {
+            "data": [
+                {
+                    "name": "test_login",
+                    "status": "unknown",
+                    "duration": 0.42,
+                },
+                {
+                    "name": "test_logout",
+                    "status": "failed",
+                    "duration": 0.18,
+                },
+                {
+                    "name": "test_signup",
+                    "status": "unknown",
+                    "duration": 0.05,
+                },
+            ],
+            "results":{}
+        }
+    )
