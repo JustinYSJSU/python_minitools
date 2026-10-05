@@ -14,3 +14,17 @@ class HeartbeatPublisherNode(Node):
         msg.data = True
 
         self.pub.publish(msg=msg)
+
+def main():
+    rclpy.init() # initialize ros2 communication
+    my_pub = HeartbeatPublisherNode()
+    print("Publishing")
+
+try:
+    rclpy.spin(my_pub) # run until interrupt via keyboard
+except KeyboardInterrupt:
+    print("Terminating node...")
+    my_pub.destroy_node()
+
+if __name__ == '__main__':
+        main()
